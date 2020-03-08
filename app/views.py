@@ -12,12 +12,27 @@ from .controller import create_reservation
 from .models import Table, Reservation, User
 
 from oauthlib.oauth2 import WebApplicationClient
+# from flask_oauth import OAuth
 import requests
 
-from .send_mail import send_email
+# from .send_mail import send_email
 
 RESTAURANT_OPEN_TIME=13
 RESTAURANT_CLOSE_TIME=24
+# FACEBOOK_APP_ID = '191256295434901'
+# FACEBOOK_APP_SECRET = 'd6337313ba9718637d1132b6c07b5fc7'
+# oauth = OAuth()
+
+# Facebook Configration
+# facebook = oauth.remote_app('facebook',
+#     base_url='https://graph.facebook.com/',
+#     request_token_url=None,
+#     access_token_url='/oauth/access_token',
+#     authorize_url='https://www.facebook.com/dialog/oauth',
+#     consumer_key=FACEBOOK_APP_ID,
+#     consumer_secret=FACEBOOK_APP_SECRET,
+#     request_token_params={'scope': 'email'}
+# )
 
 @login_manager.unauthorized_handler
 def unauthorized():
@@ -43,14 +58,6 @@ def load_user(user_id):
 @app.route("/")
 def index():
     if current_user.is_authenticated:
-        # return (
-        #     "<p>Hello, {}! You're logged in! Email: {}</p>"
-        #     "<div><p>Google Profile Picture:</p>"
-        #     '<img src="{}" alt="Google profile pic"></img></div>'
-        #     '<a class="button" href="/logout">Logout</a>'.format(
-        #         current_user.name, current_user.email, current_user.profile_pic
-        #     )
-        # )
         return render_template('index.html')
     else:
         return render_template('login.html')
@@ -133,6 +140,31 @@ def callback():
     # Send user back to homepage
     return redirect(url_for("index"))
 
+# @app.route('/fblogin')
+# def fblogin():
+#     return facebook.authorize(callback=url_for('facebook_authorized',
+#         next=request.args.get('next') or request.referrer or None,
+#         _external=True))
+#
+#
+# @app.route('/login/fbcallback')
+# @facebook.authorized_handler
+# def facebook_authorized(resp):
+#     if resp is None:
+#         return 'Access denied: reason=%s error=%s' % (
+#             request.args['error_reason'],
+#             request.args['error_description']
+#         )
+#     session['oauth_token'] = (resp['access_token'], '')
+#     me = facebook.get('/me')
+#     return 'Logged in as id=%s name=%s redirect=%s' % \
+#         (me.data['id'], me.data['name'], request.args.get('next'))
+#
+#
+# @facebook.tokengetter
+# def get_facebook_oauth_token():
+#     return session.get('oauth_token')
+
 
 @app.route("/logout")
 @login_required
@@ -166,7 +198,7 @@ def make_reservation():
         reservation = create_reservation(form)
         if reservation:
             flash("Reservation created!")
-            send_email(current_user.email, current_user.name)
+            # send_email(current_user.email, current_user.name)
             return redirect('/book')
         else:
             flash("That time is taken!  Try another time")
