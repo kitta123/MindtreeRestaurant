@@ -1,5 +1,6 @@
 import datetime
 import json
+import smtplib, os, sys
 import sqlite3
 from User_login_db import init_db_command
 from app import app, db, login_manager, mail
@@ -195,6 +196,29 @@ def get_google_provider_cfg():
 def book():
     return render_template('index.html', title="My Restaurant")
 
+def send_email(email, name):
+    date = datetime.datetime.now()
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        #ehlo command Hostname to send for this command defaults to the FQDN of the local host.
+        server.ehlo()
+        #Puts the connection to the SMTP server into TLS mode
+        server.starttls()
+        server.ehlo()
+        #Log in on an SMTP server that requires authentication.
+        server.login("mindtreedummy123@gmail.com", "Kk*8495977557")
+        msg = f"""Hi {name},\nYou have made a reservation successfully in our restaurant on {"Date&Time :" + str(date)}.
+                             \nFeel free to contact us for any inquiries. Thank you.\nRestaurant Staff""".format(name,
+                                                                                                                 date)
+        # server.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
+        server.sendmail("mindtreedummy123@gmail.com", email, msg)
+        return (jsonify({'status': 'Reservation added successfully'}))
+        print("Reservation added successfully")
+
+    except Exception as e:
+        return (jsonify({'status': 'Reservation added successfully but email not sent'}))
+        print('Unable to send mail', e)
+
 
 # Using this api we are going to reserve  our table.
 @app.route('/make_reservation', methods=['GET', 'POST'])
@@ -213,7 +237,7 @@ def make_reservation():
         reservation = create_reservation(form)
         if reservation:
             flash("Reservation created!")
-            # send_email(current_user.email, current_user.name)
+            send_email(current_user.email, current_user.name)
             return redirect('/book')
         else:
             flash("That time is taken!  Try another time")
