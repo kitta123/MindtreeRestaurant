@@ -249,7 +249,7 @@ def show_reservations(reservation_date = datetime.datetime.strftime(datetime.dat
     reservations = Reservation.query.filter(Reservation.reservation_time >= res_date,
                                             Reservation.reservation_time < res_date + datetime.timedelta(days=1)).all()
     total_slots = len(Table.query.all()) * (RESTAURANT_CLOSE_TIME - RESTAURANT_OPEN_TIME)
-    util = (len(reservations) / float(total_slots)) * 100
+    util = round((len(reservations) / float(total_slots)) * 100, 2)
     return render_template('show_reservations.html', title="Reservations", reservations=reservations, form=form, total_slots=total_slots, utilization=util)
 
 
@@ -259,7 +259,7 @@ def admin():
     return render_template('admin.html', title="Admin")
 
 
-# This is for calculating the percentage of the diffrent tables.
+# This is for calculating the percentage of the different tables.
 @app.context_processor
 def utility_processor():
     def table_utilization(table):

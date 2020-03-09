@@ -1,4 +1,4 @@
-<style>
+<style type="text/css">
   .backgroundimage {
     background-image: url('static/background.jpg');
     background-size: cover;
@@ -6,8 +6,217 @@
   }
 
   hr.style2 {
-	border-top: 3px double #8c8b8b;
-}
+    border-top: 3px double #8c8b8b;
+  }
+
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    background: #F1F3FA;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  #mainNav {
+    background-color: darkslategrey;
+    color: white;
+  }
+
+  #mainNav .navbar-brand {
+    color: #fed136;
+    font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
+  }
+
+
+  .content {
+    flex: 1 0 auto;
+  }
+
+  .footer {
+    flex-shrink: 0;
+  }
+
+
+  footer {
+    text-align: center;
+    background-color: white;
+  }
+
+  .ft {
+    padding-left: 22px;
+    padding-right: 31px;
+  }
+
+  footer span.copyright {
+    font-size: 90%;
+    line-height: 40px;
+    text-transform: none;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: blak;
+  }
+
+  footer ul.quicklinks {
+    font-size: 90%;
+    line-height: 40px;
+    margin-bottom: 0;
+    text-transform: none;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  ul.social-buttons {
+    margin-bottom: 0;
+  }
+
+  ul.social-buttons li a {
+    font-size: 20px;
+    line-height: 40px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    color: white;
+    border-radius: 100%;
+    outline: none;
+    background-color: #212529;
+  }
+
+  ul.social-buttons li a:active,
+  ul.social-buttons li a:focus,
+  ul.social-buttons li a:hover {
+    background-color: #fed136;
+  }
+
+  .content {
+    margin-top: 60px;
+  }
+
+
+  /* Profile container */
+  .profile {
+    margin: 20px 0;
+  }
+
+  /* Profile sidebar */
+  .profile-sidebar {
+    padding: 20px 0 10px 0;
+    background: #fff;
+  }
+
+  .profile-userpic img {
+    float: none;
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+  }
+
+  .profile-usertitle {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .profile-usertitle-name {
+    color: #5a7391;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+
+  .profile-usertitle-job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .profile-userbuttons {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .profile-userbuttons .btn {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px;
+    margin-right: 5px;
+  }
+
+  .profile-userbuttons .btn:last-child {
+    margin-right: 0px;
+  }
+
+  .profile-usermenu {
+    margin-top: 30px;
+  }
+
+  .profile-usermenu ul li {
+    border-bottom: 1px solid #f0f4f7;
+  }
+
+  .profile-usermenu ul li:last-child {
+    border-bottom: none;
+  }
+
+  .profile-usermenu ul li a {
+    color: #93a3b5;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .profile-usermenu ul li a i {
+    margin-right: 8px;
+    font-size: 14px;
+  }
+
+  .profile-usermenu ul li a:hover {
+    background-color: #fafcfd;
+    color: #5b9bd1;
+  }
+
+  .profile-usermenu ul li.active {
+    border-bottom: none;
+  }
+
+  .profile-usermenu ul li.active a {
+    color: #5b9bd1;
+    background-color: #f6f9fb;
+    border-left: 2px solid #5b9bd1;
+    margin-left: -2px;
+  }
+
+  /* Profile Content */
+  .profile-content {
+    padding: 20px;
+    background: #fff;
+    min-height: 460px;
+  }
+
+  .nav>li {
+    position: relative;
+    display: block;
+  }
+
+  .avatar {
+    vertical-align: middle;
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+  }
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,14 +233,10 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Mindtree</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">App</a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -40,64 +245,87 @@
           <a class="nav-link" href="/admin">Admin</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <li class="nav-item active">
-          <a class="navbar-brand" href="/logout">Log Out</a>
-        </li>
-
-      </form>
+      <div>
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item">
+            <a class="btn btn-primary my-2 my-sm-0" href="/logout" type="submit"><i class="fa fa-sign-out"></i> Log
+              out</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
 
-  <div class="backgroundimage">
-    <div class="border border-info rounded">
-    <div class="container">
-      <div class="border border-info rounded">
-      <div class="text-center">
-        <h1>Welcome {{current_user.name}}...!</h1>
-      </div>
-      <hr class="style2">
+  <!--our content goes here-->
+  <div class="container ">
+    <div class="row profile">
+      <div class="col-md-3">
+        <div class="profile-sidebar position-fixed">
+          <!-- SIDEBAR USERPIC -->
+          <div class="profile-userpic">
+            <img src="https://media.rockstargames.com/chinatownwars/global/downloads/avatars/zhou_256x256.jpg"
+              class="img-responsive" alt="">
+          </div>
+          <!-- END SIDEBAR USERPIC -->
+          <!-- SIDEBAR USER TITLE -->
+          <div class="profile-usertitle">
+            <!-- <div class="profile-usertitle-name">
+            {{current_user.name}}
+          </div> -->
 
-
-
-
-      <div class="col-12">
-        <div class="row">
-
-          <div class="border border-info rounded">
-            <div class="col-5">
-              {% include "home.html" %}
+            <div>
+              <div class="circle">Google Profile</div>
+              <img src="{{current_user.profile_pic}}" alt="Avatar" class="avatar"></img>
             </div>
 
           </div>
-          
-            <div class="col-7">
-              <div class="col-12">
-                <div class="text-center">
-                  {% with messages = get_flashed_messages() %}
-                </div>
-                <div class="col-12">
-                  {% if messages %}
-                  <ul>
-                    {% for message in messages %}
-                    <li>{{ message }}</li>
-                    {% endfor %}
-                  </ul>
-                  {% endif %}
-                  {% endwith %}
-                  {%  block content %}{% endblock %}
-                </div>
-              </div>
-            </div>
-        
-
+          <!-- END SIDEBAR USER TITLE -->
+          <!-- SIDEBAR BUTTONS -->
+          <!-- END SIDEBAR BUTTONS -->
+          <!-- SIDEBAR MENU -->
+          <div class="profile-usermenu sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="active nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="fa fa-home"></i>
+                  Name:{{current_user.name}} </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  <i class="fa fa-user"></i>
+                  Email:{{current_user.email}} </a>
+              </li>
+          </div>
+          <!-- END MENU -->
         </div>
       </div>
+      <div class="col-md-9 " style="margin-top:100px">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {%  block content %}{% endblock %}
+
+
+      </div>
+
     </div>
   </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
 
-  </div>
+
+      </div>
+
+    </div>
   </div>
 
 </body>
