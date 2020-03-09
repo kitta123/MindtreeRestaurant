@@ -8,7 +8,8 @@ from app import mail
 
 def send_email(email, name):
 
-    date = datetime.datetime.now().strftime( "%d/%m/%Y %H:%M" )
+    # date = datetime.datetime.now().strftime( "%d/%m/%Y %H:%M" )
+    date = datetime.datetime.strftime("%Y-%m-%d")
     try:
         msg = Message("Reservation made successfully!",
                       sender="noreply@demo.com",

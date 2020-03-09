@@ -1,10 +1,11 @@
 from app import db
 from flask_login import UserMixin
-
 from User_login_db import get_db
 
-DEFAULT_RESERVATION_LENGTH = 1 # 1 hour
+# Here We arw showing the number of guests can sit in table.
+DEFAULT_RESERVATION_LENGTH = 1
 MAX_TABLE_CAPACITY = 6
+
 
 class Guest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -14,9 +15,11 @@ class Guest(db.Model):
     def __repr__(self):
         return '<Guest %r>' % (self.name)
 
+
 class Table(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     capacity = db.Column(db.Integer, index=True)
+
 
 class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,6 +29,8 @@ class Reservation(db.Model):
     table = db.relationship('Table')
     num_guests = db.Column(db.Integer, index=True)
     reservation_time = db.Column(db.DateTime, index=True)
+
+
 
 class ReservationManager(object):
     pass

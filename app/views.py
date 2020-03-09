@@ -4,13 +4,14 @@ import sqlite3
 from User_login_db import init_db_command
 from app import app, db, login_manager, mail
 from flask import render_template, flash, redirect, session, g, request, url_for, jsonify
-from flask_login import current_user, login_required, login_user,logout_user
+from flask_login import current_user, login_required, login_user, logout_user
 
 from config import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_DISCOVERY_URL
 from .forms import ReservationForm, ShowReservationsOnDateForm, AddTableForm
 from .controller import create_reservation
 from .models import Table, Reservation, User
 
+#A client utilizing the authorization code grant workflow.
 from oauthlib.oauth2 import WebApplicationClient
 # from flask_oauth import OAuth
 import requests
@@ -19,6 +20,8 @@ import requests
 
 RESTAURANT_OPEN_TIME=13
 RESTAURANT_CLOSE_TIME=24
+
+
 # FACEBOOK_APP_ID = '191256295434901'
 # FACEBOOK_APP_SECRET = 'd6337313ba9718637d1132b6c07b5fc7'
 # oauth = OAuth()
@@ -34,6 +37,7 @@ RESTAURANT_CLOSE_TIME=24
 #     request_token_params={'scope': 'email'}
 # )
 
+
 @login_manager.unauthorized_handler
 def unauthorized():
     return "You must be logged in to access this content.", 403
@@ -46,8 +50,10 @@ except sqlite3.OperationalError:
     # Assume it's already been created
     pass
 
+
 # OAuth2 client setup
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
+
 
 # Flask-Login helper to retrieve a user from our db
 @login_manager.user_loader
@@ -57,20 +63,22 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
+    # If User logged in ined page will rendered.
     if current_user.is_authenticated:
-        return render_template('index.html')
+        return render_template('index.html', title="Home Page")
+    #if not logged in which will show login page
     else:
-        return render_template('login.html')
+        return render_template('login.html', title="Login Page")
 
 
 @app.route("/login")
 def login():
-    # Find out what URL to hit for Google login
+    # Here we find out what URL to hit for Google login
     google_provider_cfg = get_google_provider_cfg()
     authorization_endpoint = google_provider_cfg["authorization_endpoint"]
 
-    # Use library to construct the request for login and provide
-    # scopes that let you retrieve user's profile from Google
+    """ Use library to construct the request for login and provide
+     scopes that let you retrieve user's profile from Google"""
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
         redirect_uri=request.base_url + "/callback",
@@ -84,8 +92,8 @@ def callback():
     # Get authorization code Google sent back to you
     code = request.args.get("code")
 
-    # Find out what URL to hit to get tokens that allow you to ask for
-    # things on behalf of a user
+    """ Here we find out what URL to hit to get tokens that allow you to ask for
+    things on behalf of a user"""
     google_provider_cfg = get_google_provider_cfg()
     token_endpoint = google_provider_cfg["token_endpoint"]
 
@@ -106,16 +114,16 @@ def callback():
     # Parse the tokens!
     client.parse_request_body_response(json.dumps(token_response.json()))
 
-    # Now that we have tokens (yay) let's find and hit URL
-    # from Google that gives you user's profile information,
-    # including their Google Profile Image and Email
+    """ Now that we have tokens (yay) let's find and hit URL
+     from Google that gives you user's profile information,
+     including their Google Profile Image and Email """
     userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
     uri, headers, body = client.add_token(userinfo_endpoint)
     userinfo_response = requests.get(uri, headers=headers, data=body)
 
-    # We want to make sure their email is verified.
-    # The user authenticated with Google, authorized our
-    # app, and now we've verified their email through Google!
+    """ Here We want to make sure their email is verified.
+     The user authenticated with Google, authorized our
+     app, and now we've verified their email through Google! """
     if userinfo_response.json().get("email_verified"):
         unique_id = userinfo_response.json()["sub"]
         users_email = userinfo_response.json()["email"]
@@ -124,8 +132,8 @@ def callback():
     else:
         return "User email not available or not verified by Google.", 400
 
-    # Create a user in our db with the information provided
-    # by Google
+    """ Here We are going to Create a user in our db with the information provided
+    by Google """
     user = User(
         id_=unique_id, name=users_name, email=users_email, profile_pic=picture
     )
@@ -139,6 +147,8 @@ def callback():
 
     # Send user back to homepage
     return redirect(url_for("index"))
+
+
 
 # @app.route('/fblogin')
 # def fblogin():
@@ -161,9 +171,11 @@ def callback():
 #         (me.data['id'], me.data['name'], request.args.get('next'))
 #
 #
+#
 # @facebook.tokengetter
 # def get_facebook_oauth_token():
 #     return session.get('oauth_token')
+
 
 
 @app.route("/logout")
@@ -171,6 +183,7 @@ def callback():
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
 
 
 def get_google_provider_cfg():
@@ -182,6 +195,8 @@ def get_google_provider_cfg():
 def book():
     return render_template('index.html', title="My Restaurant")
 
+
+# Using this api we are going to reserve  our table.
 @app.route('/make_reservation', methods=['GET', 'POST'])
 @login_required
 def make_reservation():
@@ -206,11 +221,10 @@ def make_reservation():
     return render_template('make_reservation.html', title="Make Reservation", form=form)
 
 
+#Here we can see the reserved tables and which will shows the tables.
 @app.route('/show_tables', methods=['GET', 'POST'])
 def show_tables():
-
     form = AddTableForm()
-
     if form.validate_on_submit():
         table = Table(capacity=int(form.table_capacity.data))
         db.session.add(table)
@@ -221,6 +235,9 @@ def show_tables():
     tables = Table.query.all()
     return render_template('show_tables.html', title="Tables", tables=tables, form=form)
 
+
+
+#Here we can see the reserved tables which will shows the reserved tables.
 @app.route('/show_reservations', methods=['GET', 'POST'])
 @app.route('/show_reservations/<reservation_date>', methods=['GET', 'POST'])
 def show_reservations(reservation_date = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")):
@@ -235,10 +252,14 @@ def show_reservations(reservation_date = datetime.datetime.strftime(datetime.dat
     util = (len(reservations) / float(total_slots)) * 100
     return render_template('show_reservations.html', title="Reservations", reservations=reservations, form=form, total_slots=total_slots, utilization=util)
 
+
+#Here it will redirect to admin Page
 @app.route('/admin')
 def admin():
     return render_template('admin.html', title="Admin")
 
+
+# This is for calculating the percentage of the diffrent tables.
 @app.context_processor
 def utility_processor():
     def table_utilization(table):

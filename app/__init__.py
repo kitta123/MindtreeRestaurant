@@ -10,7 +10,6 @@ db = SQLAlchemy(app)
 mail = Mail(app)
 
 # User session management setup
-# https://flask-login.readthedocs.io/en/latest
 login_manager = LoginManager()
 login_manager.init_app(app)
 

@@ -2,18 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44e1e48a-6469-4283-a187-d9dbd323d946" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/account.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/send_mail.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/send_mail.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/make_reservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/make_reservation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/show_reservations.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/show_reservations.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/show_tables.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/show_tables.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,22 +77,22 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="466" y="154" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1583596817885" />
-    <state width="1343" height="110" key="GridCell.Tab.0.bottom" timestamp="1583659564115">
+    <state width="1343" height="110" key="GridCell.Tab.0.bottom" timestamp="1583664874959">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1343" height="110" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1583659564115" />
-    <state width="1343" height="110" key="GridCell.Tab.0.center" timestamp="1583659564114">
+    <state width="1343" height="110" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1583664874959" />
+    <state width="1343" height="110" key="GridCell.Tab.0.center" timestamp="1583664874954">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1343" height="110" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1583659564114" />
-    <state width="1343" height="110" key="GridCell.Tab.0.left" timestamp="1583659564113">
+    <state width="1343" height="110" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1583664874954" />
+    <state width="1343" height="110" key="GridCell.Tab.0.left" timestamp="1583664874951">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1343" height="110" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1583659564113" />
-    <state width="1343" height="110" key="GridCell.Tab.0.right" timestamp="1583659564114">
+    <state width="1343" height="110" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1583664874951" />
+    <state width="1343" height="110" key="GridCell.Tab.0.right" timestamp="1583664874956">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1343" height="110" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1583659564114" />
+    <state width="1343" height="110" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1583664874956" />
     <state x="172" y="31" key="SettingsEditor" timestamp="1583659002865">
       <screen x="0" y="27" width="1366" height="741" />
     </state>

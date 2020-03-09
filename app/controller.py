@@ -2,7 +2,7 @@ from .models import Table, Guest, Reservation
 from app import db
 import datetime
 
-DEFAULT_RESERVATION_LENGTH = 1 # 1 hour
+DEFAULT_RESERVATION_LENGTH = 1
 
 def create_reservation(form_data):
     guest = Guest.query.filter_by(phone_number=form_data.guest_phone.data).first()
